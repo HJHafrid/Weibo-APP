@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1909" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="M1I-BB-uLo">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <scenes>
+        <!--Base Navigation Controller-->
+        <scene sceneID="sJO-Ha-RCv">
+            <objects>
+                <navigationController id="M1I-BB-uLo" customClass="BaseNavigationController" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="40f-XV-ApK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="eKS-HM-xAf" kind="relationship" relationship="rootViewController" id="Ucn-6a-Mlh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2bX-Ug-aHY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-290" y="415"/>
+        </scene>
+        <!--发现-->
+        <scene sceneID="9nR-jc-FLT">
+            <objects>
+                <viewController id="eKS-HM-xAf" customClass="DisCoverViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aC4-qx-q1R"/>
+                        <viewControllerLayoutGuide type="bottom" id="sn0-F6-Q6G"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="X3s-KI-A7h">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="发现" id="Tf0-ke-zNb"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ebF-3f-C5n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="456" y="415"/>
+        </scene>
+    </scenes>
+</document>
