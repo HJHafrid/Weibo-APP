@@ -1,13 +1,13 @@
 //
-//  OtherViewController.h
+//  SendWeiboViewController.h
 //  项目2_微博
 //
-//  Created by mac57 on 16/7/29.
+//  Created by mac57 on 16/8/8.
 //  Copyright © 2016年 mac57. All rights reserved.
 //
 
 #import "BaseViewController.h"
 
-@interface OtherViewController : BaseViewController
+@interface SendWeiboViewController : BaseViewController
 
 @end

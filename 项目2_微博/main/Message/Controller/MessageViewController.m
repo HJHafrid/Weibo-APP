@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+
 }
 - (IBAction)catTheme:(id)sender {
     [ThemeManager shareManager].nowThemeName = @"cat";

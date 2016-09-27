@@ -9,6 +9,13 @@
 #import "MoreViewController.h"
 #import "AppDelegate.h"
 @interface MoreViewController ()
+
+@property (weak, nonatomic) IBOutlet ThemeLable *lable4;
+@property (weak, nonatomic) IBOutlet ThemeLable *lable3;
+@property (weak, nonatomic) IBOutlet ThemeLable *lable2;
+@property (weak, nonatomic) IBOutlet ThemeLable *lable1;
+@property (weak, nonatomic) IBOutlet ThemeLable *themeLable;
+@property (weak, nonatomic) IBOutlet ThemeLable *swapLable;
 @property (weak, nonatomic) IBOutlet ThemeImageView *view1;
 @property (weak, nonatomic) IBOutlet ThemeImageView *view2;
 @property (weak, nonatomic) IBOutlet ThemeImageView *view3;
@@ -21,15 +28,30 @@
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate logoutWeibo];
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    ThemeManager *manager = [ThemeManager shareManager];
+    _themeLable.text = manager.nowThemeName;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+
+    ThemeImageView *bgImageView = [[ThemeImageView alloc] initWithFrame:self.view.bounds];
+    bgImageView.imageName = @"bg_detail.jpg";
+    [self.view insertSubview:bgImageView atIndex:0];
     
     _view1.imageName = @"more_icon_theme.png";
     _view2.imageName = @"more_icon_feedback.png";
     _view3.imageName = @"more_icon_draft.png";
     _view4.imageName = @"more_icon_about.png";
+    
+    _swapLable.colorName = @"More_Item_Text_color";
+    _themeLable.colorName = @"More_Item_Text_color";
+    _lable1.colorName = @"More_Item_Text_color";
+    _lable2.colorName = @"More_Item_Text_color";
+    _lable3.colorName = @"More_Item_Text_color";
+    _lable4.colorName = @"More_Item_Text_color";
+    
 }
 
 - (void)didReceiveMemoryWarning {

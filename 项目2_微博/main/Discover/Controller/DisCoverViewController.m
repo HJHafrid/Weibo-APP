@@ -7,7 +7,7 @@
 //
 
 #import "DisCoverViewController.h"
-
+#import "NearbyUserViewController.h"
 @interface DisCoverViewController ()
 
 @end
@@ -16,7 +16,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor redColor];
+}
+- (IBAction)nearbyButton:(id)sender {
+    NearbyUserViewController *nearby = [[NearbyUserViewController alloc] init];
+    nearby.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:nearby animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

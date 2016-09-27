@@ -8,7 +8,10 @@
 
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
-
+#import "MMDrawerController.h"
+#import "LeftViewController.h"
+#import "RightViewController.h"
+#import "BaseNavigationController.h"
 #define kWeiboAuthDateKey @"kWeiboAuthDateKey"
 @interface AppDelegate ()<SinaWeiboDelegate>
 
@@ -22,7 +25,27 @@
     [self.window makeKeyAndVisible];
     
     MainTabBarController *tab = [[MainTabBarController alloc] init];
-    self.window.rootViewController = tab;
+//    self.window.rootViewController = tab;
+    
+    LeftViewController *leftvc = [[LeftViewController alloc] init];
+    RightViewController *rightvc = [[RightViewController alloc] init];
+    BaseNavigationController *leftCtrl = [[BaseNavigationController alloc] initWithRootViewController:leftvc];
+    BaseNavigationController *rightCtrl = [[BaseNavigationController alloc] initWithRootViewController:rightvc];
+    MMDrawerController *mmd = [[MMDrawerController alloc] initWithCenterViewController:tab leftDrawerViewController:leftCtrl rightDrawerViewController:rightCtrl];
+    mmd.maximumLeftDrawerWidth = 180;
+    mmd.maximumRightDrawerWidth = 80;
+    [mmd setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    [mmd setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    
+    [mmd setDrawerVisualStateBlock:^(MMDrawerController *drawerController, MMDrawerSide drawerSide, CGFloat percentVisible) {
+        MMExampleDrawerVisualStateManager *manager = [MMExampleDrawerVisualStateManager sharedManager];
+        MMDrawerControllerDrawerVisualStateBlock block = [manager drawerVisualStateBlockForDrawerSide:drawerSide];
+        if (block) {
+            block(drawerController, drawerSide, percentVisible);
+        }
+    }];
+    
+    self.window.rootViewController = mmd;
     
     _sinaWeibo = [[SinaWeibo alloc] initWithAppKey:@"1328979684" appSecret:@"3866fbc92658b2cbd179cc7f9984b2f2" appRedirectURI:@"http://www.baidu.com" andDelegate:self];
     

@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface ProfileViewController : BaseViewController
-
+@property (nonatomic , copy) NSArray *marray;
 @end

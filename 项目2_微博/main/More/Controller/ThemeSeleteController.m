@@ -10,11 +10,9 @@
 @interface ThemeSeleteController ()<UITableViewDelegate , UITableViewDataSource>
 {
     UITableView *_tableView;
+    UIColor *_textColor;
     
-    
-    
-    
-    
+//    ThemeSeparator *sep;
 }
 @end
 @implementation ThemeSeleteController
@@ -23,13 +21,21 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor purpleColor];
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ksWidth, ksHeight) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, ksWidth, ksHeight) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
+    _tableView.backgroundColor = [UIColor clearColor];
     
     _tableView.delegate = self;
     _tableView.dataSource = self;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(themeChanged) name:kThemePictureChange object:nil];
     
-    
+}
+- (void)themeChanged
+{
+    _textColor = [[ThemeManager shareManager] colorWithName:kMoreItemTextColor];
+    [_tableView reloadData];
+    _tableView.separatorColor = [[ThemeManager shareManager] colorWithName:kMoreItemLineColor];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -42,42 +48,47 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ThemeManager *manager = [ThemeManager shareManager];
-    NSDictionary *themesName = manager.allThemes;
-    NSArray *themeName = themesName.allKeys;
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    NSDictionary *allThemes = manager.allThemes;
+    NSArray *allNames = allThemes.allKeys;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    
+
+    
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell.backgroundColor = [UIColor clearColor];
     }
-    NSString *name = themeName[indexPath.row];
-    cell.textLabel.text = name;
+    NSString *key = allNames[indexPath.row];
+    cell.textLabel.text = key;
+    cell.textLabel.textColor = _textColor;
     
-    NSString *picName = [NSString stringWithFormat:@"%@/%@", themesName[name], @"more_icon_theme.png"];
-    UIImage *image = [UIImage imageNamed:picName];
+    NSString *imageName = [NSString stringWithFormat:@"%@/%@", allThemes[key], @"more_icon_theme.png"];
+    UIImage *image = [UIImage imageNamed:imageName];
     cell.imageView.image = image;
+    NSLog(@"111");
+//    cell.colorName = @"bg_detail.jpg";
     
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-//    [cell addGestureRecognizer:tap];
+    if ([key isEqualToString:manager.nowThemeName]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else
+    {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    
+
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    NSLog(@"%li", indexPath.row);
     ThemeManager *manager = [ThemeManager shareManager];
-    NSDictionary *themesName = manager.allThemes;
-    NSArray *themeName = themesName.allKeys;
-    NSString *name = themeName[indexPath.row];
-    NSMutableString *picName = [NSMutableString stringWithFormat:@"%@", themesName[name]];
-    NSRange range = NSMakeRange(0, 6);
-    [picName deleteCharactersInRange:range];
-    NSLog(@"%@", picName);
-    [ThemeManager shareManager].nowThemeName = picName;
+    NSDictionary *allThemes = manager.allThemes;
+    NSArray *allNames = allThemes.allKeys;
+    NSString *selectTheme = allNames[indexPath.row];
+
+    manager.nowThemeName = selectTheme;
+    [_tableView reloadData];
     
 }
-- (void)tapAction:(UITapGestureRecognizer *)tap
-{
-    NSLog(@"1");
-    
-    
-}
+
 @end

@@ -1,22 +1,35 @@
 //
-//  OtherViewController.m
+//  WeiboWebViewController.m
 //  项目2_微博
 //
-//  Created by mac57 on 16/7/29.
+//  Created by mac57 on 16/8/6.
 //  Copyright © 2016年 mac57. All rights reserved.
 //
 
-#import "OtherViewController.h"
+#import "WeiboWebViewController.h"
 
-@interface OtherViewController ()
+@interface WeiboWebViewController ()
 
 @end
 
-@implementation OtherViewController
+@implementation WeiboWebViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, ksWidth, ksHeight - 64)];
+    [self.view addSubview:web];
+    
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:self.url];
+    [web loadRequest:request];
+    
+}
+-(instancetype)initWithURL:(NSURL *)url
+{
+    self = [super init];
+    if (self) {
+        self.url = url;
+    }
+    return self;
 }
 
 - (void)didReceiveMemoryWarning {

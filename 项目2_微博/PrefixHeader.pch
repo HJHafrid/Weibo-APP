@@ -12,12 +12,43 @@
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 //屏幕宽高
+
+#define kScreenWidth ([UIScreen mainScreen].bounds.size.width)
+#define kScreenHeight ([UIScreen mainScreen].bounds.size.height)
+
 #define ksWidth ([UIScreen mainScreen].bounds.size.width)
 #define ksHeight ([UIScreen mainScreen].bounds.size.height)
 //手机系统版本
 #define kSystemVersion ([[UIDevice currentDevice].systemVersion floatValue])
 #import "SinaWeibo.h"
 #import "ThemeManager.h"
+#import "WeiboModel.h"
+#import "myModel.h"
+#import "UserModel.h"
+#import "MMExampleDrawerVisualStateManager.h"
+#import "UIImageView+WebCache.h"
+#import "UIViewExt.h"
+#define pointsize 3
+#define kLinkColor @"Link_color"
 #define kSinaWeiBoObject ((AppDelegate *)[UIApplication sharedApplication].delegate).sinaWeibo
 #define kThemePictureChange @"kThemePictureChange"
+
+
+#define kWeiboTextFont [UIFont systemFontOfSize:16]
+#define kReWeiboTextFont [UIFont systemFontOfSize:14]
+
+//------------------------字体颜色------------------------
+//More界面单元格字体颜色
+#define kMoreItemTextColor @"More_Item_Text_color"
+//More界面，表视图中单元格分割线颜色
+#define kMoreItemLineColor @"More_Item_Line_color"
+//Home 微博正文颜色
+#define kHomeWeiboTextColor @"Timeline_Content_color"
+//Home 转发微博正文颜色
+#define kHomeReWeiboTextColor @"Detail_Content_color"
+//Home 时间/来源文本颜色
+#define kHomeTimeLabelTextColor @"Timeline_Time_color"
+//Home 用户名文本颜色
+#define kHomeUserNameTextColor @"Timeline_Name_color"
+
 #endif /* PrefixHeader_pch */

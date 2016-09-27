@@ -16,16 +16,40 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (kSystemVersion >= 7.0) {
-        [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"mask_titlebar64@2x.png"] forBarMetrics:UIBarMetricsDefault];
-    }
-    else{
-        [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"mask_titlebar@2x.png"] forBarMetrics:UIBarMetricsDefault];
-    }
+//    if (kSystemVersion >= 7.0) {
+//        ThemeImageView *navImage = [[ThemeImageView alloc] initWithFrame:CGRectMake(0, -20, ksWidth, 64)];
+//        navImage.imageName = @"mask_titlebar64@2x.png";
+//        [self.navigationBar insertSubview:navImage atIndex:1];
+//    }
+//    else{
+//        ThemeImageView *navImage = [[ThemeImageView alloc] initWithFrame:CGRectMake(0, 0, ksWidth, 44)];
+//        navImage.imageName = @"mask_titlebar@2x.png";
+//        [self.navigationBar insertSubview:navImage atIndex:1];
+//    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(navChange) name:kThemePictureChange object:nil];
+    
     NSDictionary *attributes = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:25], NSForegroundColorAttributeName : [UIColor whiteColor]};
     self.navigationBar.titleTextAttributes = attributes;
+    
+    [self navChange];
 }
-
+- (void)navChange
+{
+    NSString *imageName;
+    if (kSystemVersion >= 7.0) {
+        imageName = @"mask_titlebar64@2x.png";
+    }
+    else
+    {
+        imageName = @"mask_titlebar@2x.png";
+    }
+    UIImage *image = [[ThemeManager shareManager] themeImageWithName:imageName];
+    [self.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+}
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

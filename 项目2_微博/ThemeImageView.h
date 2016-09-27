@@ -10,4 +10,7 @@
 
 @interface ThemeImageView : UIImageView
 @property (nonatomic, copy) NSString *imageName;
+//拉伸参数
+@property (nonatomic, assign) CGFloat leftCapWidth;
+@property (nonatomic, assign) CGFloat topCapHeight;
 @end

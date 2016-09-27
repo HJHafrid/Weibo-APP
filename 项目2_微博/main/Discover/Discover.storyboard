@@ -32,6 +32,15 @@
                     <view key="view" contentMode="scaleToFill" id="X3s-KI-A7h">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPh-pM-U2R">
+                                <rect key="frame" x="57" y="119" width="135" height="134"/>
+                                <state key="normal" backgroundImage="附近微博.jpg"/>
+                                <connections>
+                                    <action selector="nearbyButton:" destination="eKS-HM-xAf" eventType="touchUpInside" id="hJs-Jc-8vo"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="发现" id="Tf0-ke-zNb"/>
@@ -41,4 +50,7 @@
             <point key="canvasLocation" x="456" y="415"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="附近微博.jpg" width="184" height="184"/>
+    </resources>
 </document>

@@ -14,12 +14,16 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.leftCapWidth = 0;
+        self.topCapHeight = 0;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(themeChange) name:kThemePictureChange object:nil];
     }
     return self;
 }
 -(void)awakeFromNib
 {
+    self.leftCapWidth = 0;
+    self.topCapHeight = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(themeChange) name:kThemePictureChange object:nil];
 }
 - (void)dealloc
@@ -34,7 +38,20 @@
 - (void)themeChange
 {
     ThemeManager *manager = [ThemeManager shareManager];
-    self.image = [manager themeImageWithName:self.imageName];
+    UIImage *image = [manager themeImageWithName:self.imageName];
+    image = [image stretchableImageWithLeftCapWidth:self.leftCapWidth topCapHeight:self.topCapHeight];
+    
+    self.image = image;
+}
+-(void)setLeftCapWidth:(CGFloat)leftCapWidth
+{
+    _leftCapWidth = leftCapWidth;
+    [self themeChange];
+}
+-(void)setTopCapHeight:(CGFloat)topCapHeight
+{
+    _topCapHeight = topCapHeight;
+    [self themeChange];
 }
 
 @end

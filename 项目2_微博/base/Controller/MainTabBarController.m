@@ -11,7 +11,7 @@
 
 @interface MainTabBarController ()
 {
-    UIImageView *_selectView;
+    ThemeImageView *_selectView;
 }
 
 @end
@@ -42,15 +42,10 @@
 
 - (void)creatTabBarButton
 {
-//    ThemeButton *button = [[ThemeButton alloc] init];
-//    button.buttonName = @"mask_navbar@2x.png";
-//    ThemeManager *manager = [ThemeManager shareManager];
-//    NSDictionary *names = manager.allThemes;
-//    NSArray *arrayName = names.allKeys;
-//    NSString *name = themeName[]
-//    NSString *nameOne = [NSString stringWithFormat:@"%@/%@", names[]]
+    ThemeImageView *bgImageView = [[ThemeImageView alloc] initWithFrame:CGRectMake(0, -2, ksWidth, 51)];
+    bgImageView.imageName = @"mask_navbar@2x.png";
+    [self.tabBar insertSubview:bgImageView atIndex:0];
     
-    self.tabBar.backgroundImage = [UIImage imageNamed:@"mask_navbar@2x.png"];
     for (UIView *view in self.tabBar.subviews) {
         Class buttonClass = NSClassFromString(@"UITabBarButton");
         if ([view isKindOfClass:buttonClass]) {
@@ -68,9 +63,9 @@
         button.buttonName = picName;
         [button addTarget:self action:@selector(tabBarButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
-    _selectView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_bottom_tab_arrow@2x.png"]];
-    _selectView.frame = CGRectMake(0, 0, buttonWidth, 49);
-    [self.tabBar insertSubview:_selectView atIndex:0];
+    _selectView = [[ThemeImageView alloc] initWithFrame:CGRectMake(0, 0, buttonWidth, 49)];
+    _selectView.imageName = @"home_bottom_tab_arrow@2x.png";
+    [self.tabBar insertSubview:_selectView atIndex:1];
     self.tabBar.shadowImage = [[UIImage alloc] init];
     
     
